@@ -1,1 +1,0 @@
-# symfony-course-project
