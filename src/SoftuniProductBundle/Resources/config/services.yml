@@ -1,0 +1,4 @@
+services:
+#    softuni_product.example:
+#        class: SoftuniProductBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
