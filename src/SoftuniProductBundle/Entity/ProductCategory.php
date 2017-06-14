@@ -67,7 +67,7 @@ class ProductCategory
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="ProductCategory", mappedBy="parent")
      */
     private $children;
 

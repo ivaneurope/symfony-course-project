@@ -13,7 +13,14 @@ class ProductCategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('slug')->add('title')->add('description')->add('image')->add('rank')->add('createdAt')->add('updatedAt')->add('parent');
+        $builder->add('slug')
+                ->add('title')
+                ->add('description')
+                ->add('image')
+                ->add('rank')
+                ->add('createdAt')
+                ->add('updatedAt')
+                ->add('parent');
     }
     
     /**

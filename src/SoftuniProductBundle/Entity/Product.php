@@ -59,6 +59,8 @@ class Product
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="Please, upload PNG, JPEG or GIF file")
+     * @Assert\File(mimeTypes={ "application/png",  "application/jpeg", "application/gif" })
      * @ORM\Column(name="image", type="string", length=255, unique=true)
      */
     private $image;
