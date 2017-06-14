@@ -4,6 +4,7 @@ namespace SoftuniProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProductCategory
@@ -46,7 +47,9 @@ class ProductCategory
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Please, upload PNG, JPEG or GIF file")
+     * @Assert\File(mimeTypes={ "application/png",  "application/jpeg", "application/gif" })
+     * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
 
