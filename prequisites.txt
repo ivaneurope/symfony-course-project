@@ -1,6 +1,6 @@
 # Used perquisites in this project
 # Symfony Version 3.2.9
-# Git Bash and GitHub repository
+# Cmder(Command Prompt clone) and GitHub repository
 # JetBrains PhpStorm 2017.1.4
 
 # Ivan Yordanov
