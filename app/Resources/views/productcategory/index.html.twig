@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Productcategories list</h1>
+    <h1>Categories list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -26,26 +26,21 @@
                 <td>{{ productCategory.description }}</td>
                 <td>{{ productCategory.image }}</td>
                 <td>{{ productCategory.rank }}</td>
-                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('Y-m-d') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_product-category_show', { 'id': productCategory.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="btn btn-success" href="{{ path('admin_product-category_show', { 'id': productCategory.id }) }}">Show</a>
+                    <a class="btn btn-warning" href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
+                    <a class="btn btn-danger" href="#">Remove</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_product-category_new') }}">Create a new productCategory</a>
-        </li>
-    </ul>
+    {#<ul>#}
+        {#<li>#}
+            <a class="btn btn-primary" href="{{ path('admin_product-category_new') }}">Add Category</a>
+        {#</li>#}
+    {#</ul>#}
 {% endblock %}

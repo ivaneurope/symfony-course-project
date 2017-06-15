@@ -6,19 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductCategoryType extends AbstractType
+class ProductType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('slug')
-                ->add('title')
-                ->add('description')
-                ->add('image')
-                ->add('rank')
-                ->add('parent');
+        $builder->add('code')->add('slug')->add('title')->add('subtitle')->add('description')->add('image')->add('price')->add('rank')->add('createdAt')->add('updatedAt')->add('categories');
     }
     
     /**
@@ -27,7 +22,7 @@ class ProductCategoryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SoftuniProductBundle\Entity\ProductCategory'
+            'data_class' => 'SoftuniProductBundle\Entity\Product'
         ));
     }
 
@@ -36,7 +31,7 @@ class ProductCategoryType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'softuniproductbundle_productcategory';
+        return 'softuniproductbundle_product';
     }
 
 

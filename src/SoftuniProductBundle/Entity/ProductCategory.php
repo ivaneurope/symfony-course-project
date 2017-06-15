@@ -96,6 +96,40 @@ class ProductCategory
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param ArrayCollection $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
+    public function addProduct(Product $product)
+    {
+        if (!$this->products->contains($product))
+        {
+            $this->products->add($product);
+        }
+
+        return $product;
+    }
+
+    public function removeProduct(Product $product)
+    {
+        if ($this->products->contains($product))
+        {
+            $this->products->removeElement($product);
+        }
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -321,9 +355,9 @@ class ProductCategory
         return $this->updatedAt;
     }
 
-    public function addProduct(Product $product)
-    {
-        $this->products[] = $product;
-    }
+//    public function addProduct(Product $product)
+//    {
+//        $this->products[] = $product;
+//    }
 }
 

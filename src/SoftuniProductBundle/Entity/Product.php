@@ -3,6 +3,7 @@
 namespace SoftuniProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -95,7 +96,7 @@ class Product
 
     /**
      * @ORM\ManyToMany(targetEntity="ProductCategory", inversedBy="products")
-     * @JoinTable(name="products_categories")
+     * @ORM\JoinTable(name="products_categories")
      */
     private $categories;
 

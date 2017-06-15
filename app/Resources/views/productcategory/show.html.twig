@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}View category{% endblock %}
+
 {% block body %}
-    <h1>Productcategory</h1>
+    <h1>Product Category</h1>
 
     <table>
         <tbody>
@@ -30,26 +32,26 @@
                 <td>{{ productCategory.rank }}</td>
             </tr>
             <tr>
-                <th>Createdat</th>
-                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Created At</th>
+                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('Y-m-d') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Updatedat</th>
-                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Updated At</th>
+                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('Y-m-d') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('admin_product-category_index') }}">Back to the list</a>
+            <a class="btn btn-primary" href="{{ path('admin_product-category_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
+            <a class="btn btn-warning" href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input class="btn btn-error" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
