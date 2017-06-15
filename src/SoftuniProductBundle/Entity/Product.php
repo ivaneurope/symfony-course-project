@@ -93,6 +93,16 @@ class Product
      */
     private $updatedAt;
 
+    /*
+     * @ORM\ManyToMany(targetEntity="ProductCategory", inversedBy="products")
+     * @JoinTable(name="products_categories")
+     */
+    private $categories;
+
+    public function __construct() {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id

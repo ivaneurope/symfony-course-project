@@ -85,8 +85,14 @@ class ProductCategory
      */
     private $updatedAt;
 
+    /*
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
+     */
+    private $products;
+
     public function __construct() {
-        $children = new ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
