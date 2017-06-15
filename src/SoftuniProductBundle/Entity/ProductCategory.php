@@ -85,7 +85,7 @@ class ProductCategory
      */
     private $updatedAt;
 
-    /*
+    /**
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
      */
     private $products;
@@ -319,6 +319,11 @@ class ProductCategory
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
     }
 }
 

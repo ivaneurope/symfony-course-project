@@ -93,7 +93,7 @@ class Product
      */
     private $updatedAt;
 
-    /*
+    /**
      * @ORM\ManyToMany(targetEntity="ProductCategory", inversedBy="products")
      * @JoinTable(name="products_categories")
      */
@@ -352,6 +352,12 @@ class Product
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function addCategory(ProductCategory $category)
+    {
+        $category->addProduct($this);
+        $this->categories[] = $category;
     }
 }
 

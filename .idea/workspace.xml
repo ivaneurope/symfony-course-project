@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da640520-fd90-44ff-8630-8547fba4626c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SoftuniProductBundle/Entity/Product.php" afterPath="$PROJECT_DIR$/src/SoftuniProductBundle/Entity/Product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SoftuniProductBundle/Entity/ProductCategory.php" afterPath="$PROJECT_DIR$/src/SoftuniProductBundle/Entity/ProductCategory.php" />
     </list>
@@ -22,8 +21,8 @@
       <file leaf-file-name="ProductCategory.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SoftuniProductBundle/Entity/ProductCategory.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="94" column="48" lean-forward="false" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
+            <state relative-caret-position="754">
+              <caret line="325" column="37" lean-forward="false" selection-start-line="325" selection-start-column="37" selection-end-line="325" selection-end-column="37" />
               <folding>
                 <element signature="e#47#79#0#PHP" expanded="true" />
               </folding>
@@ -64,8 +63,8 @@
       <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SoftuniProductBundle/Entity/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="95" column="6" lean-forward="true" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
+            <state relative-caret-position="773">
+              <caret line="359" column="40" lean-forward="false" selection-start-line="359" selection-start-column="40" selection-end-line="359" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -393,12 +392,12 @@
       <workItem from="1497435824129" duration="237000" />
       <workItem from="1497436229957" duration="6676000" />
       <workItem from="1497448872645" duration="2908000" />
-      <workItem from="1497513066543" duration="436000" />
+      <workItem from="1497513066543" duration="1863000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10257000" />
+    <option name="totallyTimeSpent" value="11684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -629,16 +628,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftuniProductBundle/Entity/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="95" column="6" lean-forward="true" selection-start-line="95" selection-start-column="6" selection-end-line="95" selection-end-column="6" />
+        <state relative-caret-position="773">
+          <caret line="359" column="40" lean-forward="false" selection-start-line="359" selection-start-column="40" selection-end-line="359" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SoftuniProductBundle/Entity/ProductCategory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="94" column="48" lean-forward="false" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
+        <state relative-caret-position="754">
+          <caret line="325" column="37" lean-forward="false" selection-start-line="325" selection-start-column="37" selection-end-line="325" selection-end-column="37" />
           <folding>
             <element signature="e#47#79#0#PHP" expanded="true" />
           </folding>
