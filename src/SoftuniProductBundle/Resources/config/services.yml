@@ -1,4 +1,18 @@
+parameters:
+    softunibundle.entity.product: 'SoftuniProductBundle\Entity\Product'
+    softunibundle.entity.productcategory: 'SoftuniProductBundle\Entity\ProductCategory'
+    softunibundle.service.product_manager: 'SoftuniProductBundle\Services\ProductManager'
+    softunibundle.service.productcategory_manager: 'SoftuniProductBundle\Services\ProductCategoryManager'
 services:
-#    softuni_product.example:
-#        class: SoftuniProductBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    softuni.product.product_manager:
+        class: '%softunibundle.service.product_manager%'
+        arguments:
+            entityManager: '@doctrine.orm.entity_manager'
+            class: '%softunibundle.entity.product%'
+            container: '@service_container'
+    softuni.product.productcategory_manager:
+        class: '%softunibundle.service.productcategory_manager%'
+        arguments:
+            entityManager: '@doctrine.orm.entity_manager'
+            class: '%softunibundle.entity.productcategory%'
+            container: '@service_container'

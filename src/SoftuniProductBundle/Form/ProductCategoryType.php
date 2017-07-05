@@ -2,7 +2,10 @@
 
 namespace SoftuniProductBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,12 +16,17 @@ class ProductCategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('slug')
+        $builder/*->add(array('attr' => array('class' => 'w3-margin-bottom')))*/
+                ->add('slug')
                 ->add('title')
                 ->add('description')
-                ->add('image')
+                ->add('image', FileType::class, array('required' => false,'label' => 'Image (PNG, JPEG or GIF): ', 'attr' => array('class' => 'w3-btn w3-teal w3-round-large')))
                 ->add('rank')
-                ->add('parent');
+                ->add('parent', EntityType::class, array(
+                                                                    'required' => false,
+                                                                    'placeholder' => 'Choose an option',
+                                                                    'class' => 'SoftuniProductBundle:ProductCategory',
+                                                                    ));
     }
     
     /**

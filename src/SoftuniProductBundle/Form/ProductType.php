@@ -2,9 +2,13 @@
 
 namespace SoftuniProductBundle\Form;
 
+//use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+//use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class ProductType extends AbstractType
 {
@@ -13,7 +17,17 @@ class ProductType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('code')->add('slug')->add('title')->add('subtitle')->add('description')->add('image')->add('price')->add('rank')->add('createdAt')->add('updatedAt')->add('categories');
+        $builder->add('code')
+                ->add('slug')
+                ->add('title')
+                ->add('subtitle')
+                ->add('description')
+                ->add('image')
+                ->add('price')
+                ->add('rank')
+                ->add('categories', EntityType::class, array('multiple' => true,
+                                                                        'expanded'=> true,
+                                                                        'class'=>'SoftuniProductBundle:ProductCategory'));
     }
     
     /**

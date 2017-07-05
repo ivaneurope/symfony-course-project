@@ -26,7 +26,7 @@ class ProductCategoryController extends Controller
 
         $productCategories = $em->getRepository('SoftuniProductBundle:ProductCategory')->findAll();
 
-        return $this->render('productcategory/index.html.twig', array(
+        return $this->render('SoftuniProductBundle:productcategory:index.html.twig', array(
             'productCategories' => $productCategories,
         ));
     }
@@ -44,16 +44,35 @@ class ProductCategoryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $em = $this->getDoctrine()->getManager();
+
+            //File Uploading (essential)
+
+            if($productCategory->getImage() != null) {
+
+                /** @var UploadedFile $file */
+                $file = $productCategory->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('product-category_image'),
+                    $fileName
+                );
+                $productCategory->setImage($fileName);
+            }
+
+            $productCategory->setCreatedAt(new \DateTime());
+            $productCategory->setUpdatedAt(new \DateTime());
             $em->persist($productCategory);
             $em->flush();
 
             return $this->redirectToRoute('admin_product-category_show', array('id' => $productCategory->getId()));
         }
 
-        return $this->render('productcategory/new.html.twig', array(
+        return $this->render('SoftuniProductBundle:productcategory:new.html.twig', array(
             'productCategory' => $productCategory,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -65,11 +84,23 @@ class ProductCategoryController extends Controller
      */
     public function showAction(ProductCategory $productCategory)
     {
+        $em = $this->getDoctrine()->getManager();
+        $parent = $productCategory->getId();
+        $repo = $em->getRepository('SoftuniProductBundle:ProductCategory');
+
+        $query = $repo->createQueryBuilder('pc')
+            ->where('pc.parent = :parent')
+            ->setParameter('parent', $parent)
+            ->getQuery();
+
+        $children = $query->getResult();
+
         $deleteForm = $this->createDeleteForm($productCategory);
 
-        return $this->render('productcategory/show.html.twig', array(
+        return $this->render('SoftuniProductBundle:productcategory:show.html.twig', array(
             'productCategory' => $productCategory,
             'delete_form' => $deleteForm->createView(),
+            'children' => $children,
         ));
     }
 
@@ -91,7 +122,7 @@ class ProductCategoryController extends Controller
             return $this->redirectToRoute('admin_product-category_edit', array('id' => $productCategory->getId()));
         }
 
-        return $this->render('productcategory/edit.html.twig', array(
+        return $this->render('SoftuniProductBundle:productcategory:edit.html.twig', array(
             'productCategory' => $productCategory,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

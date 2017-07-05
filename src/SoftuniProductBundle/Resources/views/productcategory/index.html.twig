@@ -3,17 +3,17 @@
 {% block body %}
     <h1>Categories list</h1>
 
-    <table class="table">
+    <table class="w3-table-all">
         <thead>
-            <tr>
+            <tr class="w3-teal">
                 <th>Id</th>
                 <th>Slug</th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Image</th>
                 <th>Rank</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
+                <th>Created</th>
+                <th>Updated</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -26,12 +26,12 @@
                 <td>{{ productCategory.description }}</td>
                 <td>{{ productCategory.image }}</td>
                 <td>{{ productCategory.rank }}</td>
-                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('d/m/Y') }}{% endif %}</td>
+                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('d/m/Y') }}{% endif %}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('admin_product-category_show', { 'id': productCategory.id }) }}">Show</a>
-                    <a class="btn btn-warning" href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
-                    <a class="btn btn-danger" href="#">Remove</a>
+                    <a class="w3-btn w3-green w3-round-large" href="{{ path('admin_product-category_show', { 'id': productCategory.id }) }}">Show</a>
+                    <a class="w3-btn w3-yellow w3-round-large" href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
+                    <a class="w3-btn w3-red w3-round-large" href="#">Remove</a>
                 </td>
             </tr>
         {% endfor %}
@@ -40,7 +40,8 @@
 
     {#<ul>#}
         {#<li>#}
-            <a class="btn btn-primary" href="{{ path('admin_product-category_new') }}">Add Category</a>
+    <br>
+            <a class="w3-btn w3-blue w3-round-large" href="{{ path('admin_product-category_new') }}">Add Category</a>
         {#</li>#}
     {#</ul>#}
 {% endblock %}

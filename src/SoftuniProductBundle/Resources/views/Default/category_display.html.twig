@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ productCategory.title }}</h1>
+    <div class="w3-third">
+    <img src="{{ productCategory.image }}">
+    <table class="w3-table-all">
+        <tbody>
+        <tr>
+            <th>Slug</th>
+            <td>{{ productCategory.slug }}</td>
+        </tr>
+        <tr>
+            <th>Parent</th>
+            <td>{% if productCategory.parent %}{{ productCategory.parent.title }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ productCategory.description }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{{ productCategory.image }}</td>
+        </tr>
+        <tr>
+            <th>Rank</th>
+            <td>{{ productCategory.rank }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Subcategories</h2>
+    {% for child in children %}
+        {{ child.title }}
+    {% endfor %}
+
+
+{% endblock %}

@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1>Product Category</h1>
-
-    <table>
+<div class="w3-third">
+    <table class="w3-table-all">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -14,6 +14,10 @@
             <tr>
                 <th>Slug</th>
                 <td>{{ productCategory.slug }}</td>
+            </tr>
+            <tr>
+                <th>Parent</th>
+                <td>{% if productCategory.parent %}{{ productCategory.parent.title }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Title</th>
@@ -33,26 +37,34 @@
             </tr>
             <tr>
                 <th>Created At</th>
-                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if productCategory.createdAt %}{{ productCategory.createdAt|date('d/m/Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Updated At</th>
-                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if productCategory.updatedAt %}{{ productCategory.updatedAt|date('d/m/Y') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
-    <ul>
+
+    <ul style="list-style-type: none; " class="w3-margin-bottom">
         <li>
-            <a class="btn btn-primary" href="{{ path('admin_product-category_index') }}">Back to the list</a>
+            <a class="w3-btn w3-blue w3-round-large w3-margin-bottom" href="{{ path('admin_product-category_index') }}">Back to the list</a>
         </li>
         <li>
-            <a class="btn btn-warning" href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
+            <a class="w3-btn w3-yellow w3-round-large w3-margin-bottom" href="{{ path('admin_product-category_edit', { 'id': productCategory.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input class="btn btn-error" type="submit" value="Delete">
+                <input class="w3-btn w3-red w3-round-large w3-margin-bottom" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
+    {% for child in children %}
+    {{ child.title }}
+    {% endfor %}
+
+
+</div>
 {% endblock %}

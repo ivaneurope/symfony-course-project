@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Categories list</h1>
+
+    <table class="w3-table-all">
+        <thead>
+        <tr class="w3-green">
+            <th>Id</th>
+            <th>Slug</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Rank</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for productCategory in productCategories %}
+            <tr>
+                <td><a href="{{ path('admin_product-category_show', { 'id': productCategory.id }) }}">{{ productCategory.id }}</a></td>
+                <td>{{ productCategory.slug }}</td>
+                <td>{{ productCategory.title }}</td>
+                <td>{{ productCategory.description }}</td>
+                <td>{{ productCategory.image }}</td>
+                <td>{{ productCategory.rank }}</td>
+                <td><a class="w3-btn w3-green w3-round-large" href="{{ path('product-category_display', { 'id': productCategory.id }) }}">View Category</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

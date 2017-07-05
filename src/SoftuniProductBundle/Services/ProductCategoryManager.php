@@ -8,13 +8,16 @@
 
 namespace SoftuniProductBundle\Services;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use SoftuniProductBundle\Entity\ProductCategory;
+use SoftuniProductBundle\Entity\Product;
 
 
 class ProductCategoryManager
 {
     protected $em, $class, $container, $repository;
+    protected $products;
 
     public function __construct(EntityManager $em, $class, $container)
     {
@@ -30,12 +33,17 @@ class ProductCategoryManager
         return new $class;
     }
 
-    public function  removeCategory(ProductCategory $category, $andFlush = true)
+    public function removeCategory(ProductCategory $category, $andFlush = true)
     {
         $this->em->remove($category);
         if ($andFlush) {
             $this->em->flush();
         }
+    }
+
+    public function findCategoryBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
     }
 
     public function getClass()

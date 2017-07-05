@@ -5,7 +5,10 @@ namespace SoftuniProductBundle\Controller;
 use SoftuniProductBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * Product controller.
@@ -26,7 +29,7 @@ class ProductController extends Controller
 
         $products = $em->getRepository('SoftuniProductBundle:Product')->findAll();
 
-        return $this->render('product/index.html.twig', array(
+        return $this->render('SoftuniProductBundle:product:index.html.twig', array(
             'products' => $products,
         ));
     }
@@ -39,19 +42,39 @@ class ProductController extends Controller
      */
     public function newAction(Request $request)
     {
+        /*$productManager = $this->get('softuni.product.product_manager');
+        $product = $productManager->createProduct();*/
         $product = new Product();
         $form = $this->createForm('SoftuniProductBundle\Form\ProductType', $product);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
+            $categories = $product->getCategories();
+
+
+            //File Uploading (essential)
+
+            /** @var UploadedFile $file */
+            $file = $product->getImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('product_image'),
+                $fileName
+            );
+            $product->setImage($fileName);
+
+
+            $product->setCreatedAt(new \DateTime());
+            $product->setUpdatedAt(new \DateTime());
+            $em->persist($categories);
             $em->persist($product);
             $em->flush();
 
             return $this->redirectToRoute('admin_product_show', array('id' => $product->getId()));
         }
 
-        return $this->render('product/new.html.twig', array(
+        return $this->render('SoftuniProductBundle:product:new.html.twig', array(
             'product' => $product,
             'form' => $form->createView(),
         ));
@@ -67,7 +90,7 @@ class ProductController extends Controller
     {
         $deleteForm = $this->createDeleteForm($product);
 
-        return $this->render('product/show.html.twig', array(
+        return $this->render('SoftuniProductBundle:product:show.html.twig', array(
             'product' => $product,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +114,7 @@ class ProductController extends Controller
             return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
         }
 
-        return $this->render('product/edit.html.twig', array(
+        return $this->render('SoftuniProductBundle:product:edit.html.twig', array(
             'product' => $product,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -133,4 +156,6 @@ class ProductController extends Controller
             ->getForm()
         ;
     }
+
+
 }

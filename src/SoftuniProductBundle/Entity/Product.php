@@ -3,7 +3,9 @@
 namespace SoftuniProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Product
@@ -61,8 +63,8 @@ class Product
      * @var string
      *
      * @Assert\NotBlank(message="Please, upload PNG, JPEG or GIF file")
-     * @Assert\File(mimeTypes={ "application/png",  "application/jpeg", "application/gif" })
-     * @ORM\Column(name="image", type="string", length=255, unique=true)
+     * @Assert\File(mimeTypes={ "image/png",  "image/jpeg", "image/gif" })
+     * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
 
@@ -98,10 +100,10 @@ class Product
      * @ORM\ManyToMany(targetEntity="ProductCategory", inversedBy="products")
      * @ORM\JoinTable(name="products_categories")
      */
-    private $categories;
+    protected $categories;
 
     public function __construct() {
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
 
@@ -247,6 +249,7 @@ class Product
         $this->image = $image;
 
         return $this;
+
     }
 
     /**
@@ -355,10 +358,30 @@ class Product
         return $this->updatedAt;
     }
 
-    public function addCategory(ProductCategory $category)
+    public function addCategory(ProductCategory $categories)
     {
-        $category->addProduct($this);
-        $this->categories[] = $category;
+        $this->categories->add($categories);
+    }
+
+    public function removeCategory(ProductCategory $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param ProductCategory $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
     }
 }
 

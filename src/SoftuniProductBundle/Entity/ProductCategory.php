@@ -47,9 +47,8 @@ class ProductCategory
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Please, upload PNG, JPEG or GIF file")
-     * @Assert\File(mimeTypes={ "application/png",  "application/jpeg", "application/gif" })
-     * @ORM\Column(name="image", type="string", length=255)
+     * @Assert\File(mimeTypes={ "image/png",  "image/jpeg", "image/gif" })
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -88,7 +87,7 @@ class ProductCategory
     /**
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
      */
-    private $products;
+    protected $products;
 
     public function __construct() {
         $this->children = new ArrayCollection();
@@ -111,23 +110,13 @@ class ProductCategory
         $this->products = $products;
     }
 
-    public function addProduct(Product $product)
-    {
-        if (!$this->products->contains($product))
-        {
-            $this->products->add($product);
-        }
-
-        return $product;
-    }
-
-    public function removeProduct(Product $product)
-    {
-        if ($this->products->contains($product))
-        {
-            $this->products->removeElement($product);
-        }
-    }
+//    public function removeProduct(Product $product)
+//    {
+//        if ($this->products->contains($product))
+//        {
+//            $this->products->removeElement($product);
+//        }
+//    }
 
     /**
      * Get id
@@ -286,7 +275,7 @@ class ProductCategory
     /**
      * Set children
      *
-     * @param integer $children
+     * @param int $children
      *
      * @return ProductCategory
      */
@@ -300,7 +289,7 @@ class ProductCategory
     /**
      * Get children
      *
-     * @return int
+     * @return ArrayCollection|int
      */
     public function getChildren()
     {
@@ -355,9 +344,23 @@ class ProductCategory
         return $this->updatedAt;
     }
 
-//    public function addProduct(Product $product)
+    public function addProduct(Product $product)
+    {
+        $this->products = $product;
+        $product->addCategory($this);
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+//    public function removeProduct(Product $product)
 //    {
-//        $this->products[] = $product;
+//        $this->products->removeElement($product);
+//        $product->removeCategory($this);
 //    }
+
 }
 
