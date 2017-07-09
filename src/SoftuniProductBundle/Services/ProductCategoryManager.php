@@ -17,7 +17,7 @@ use SoftuniProductBundle\Entity\Product;
 class ProductCategoryManager
 {
     protected $em, $class, $container, $repository;
-    protected $products;
+    //protected $products;
 
     public function __construct(EntityManager $em, $class, $container)
     {

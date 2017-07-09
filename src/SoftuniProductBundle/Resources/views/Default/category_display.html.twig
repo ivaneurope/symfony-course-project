@@ -4,8 +4,8 @@
 
     <h1>{{ productCategory.title }}</h1>
     <div class="w3-third">
-    <img src="{{ productCategory.image }}">
-    <table class="w3-table-all">
+    <img src="{{ asset('uploads/product-category/images/' ~ productCategory.image) }}" />
+    <table class="w3-table">
         <tbody>
         <tr>
             <th>Slug</th>
@@ -20,10 +20,6 @@
             <td>{{ productCategory.description }}</td>
         </tr>
         <tr>
-            <th>Image</th>
-            <td>{{ productCategory.image }}</td>
-        </tr>
-        <tr>
             <th>Rank</th>
             <td>{{ productCategory.rank }}</td>
         </tr>
@@ -32,7 +28,12 @@
 
     <h2>Subcategories</h2>
     {% for child in children %}
-        {{ child.title }}
+        <p><a href="{{ path('product-category_display', { 'id': child.id }) }}">{{ child.title }}</a></p>
+    {% endfor %}
+
+    <h2>Products</h2>
+    {% for product in productCategory.products %}
+        <p><a href="{{ path('product_display', { 'id': product.id }) }}">{{ product.title }}</a></p>
     {% endfor %}
 
 

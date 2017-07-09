@@ -5,6 +5,7 @@ namespace SoftuniProductBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * ProductCategory
@@ -344,11 +345,26 @@ class ProductCategory
         return $this->updatedAt;
     }
 
-    public function addProduct(Product $product)
+    public function addProduct(Product $products)
     {
-        $this->products = $product;
-        $product->addCategory($this);
+        $this->products = $products;
+        $products->addCategory($this);
         return $this;
+
+//        if(!$this->products->contains($product))
+//        {
+//            $this->products->add($product);
+//        }
+
+//        return $product;
+    }
+
+    public function removeProduct(Product $products)
+    {
+        if($this->products->contains($products))
+        {
+            $this->products->removeElement($products);
+        }
     }
 
     public function __toString()

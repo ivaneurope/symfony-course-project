@@ -104,6 +104,7 @@ class Product
 
     public function __construct() {
         $this->categories = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
 

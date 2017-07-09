@@ -67,7 +67,7 @@ class ProductController extends Controller
 
             $product->setCreatedAt(new \DateTime());
             $product->setUpdatedAt(new \DateTime());
-            $em->persist($categories);
+            //$em->persist($categories);
             $em->persist($product);
             $em->flush();
 

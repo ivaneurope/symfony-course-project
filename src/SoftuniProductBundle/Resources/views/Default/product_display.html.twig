@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ product.title }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Slug</th>
+                <td>{{ product.slug }}</td>
+            </tr>
+            <tr>
+                <th>Subtitle</th>
+                <td>{{ product.subtitle }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Categories</th>
+                <td>
+                  <ul>
+                    {% for category in product.categories %}
+                      <li><a href="{{ path('product-category_display', { 'id': category.id }) }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/product/images/' ~ product.image) }}" /></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

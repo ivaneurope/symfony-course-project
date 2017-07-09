@@ -3,6 +3,7 @@
 namespace SoftuniProductBundle\Controller;
 
 use SoftuniProductBundle\Entity\ProductCategory;
+use SoftuniProductBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,10 +42,16 @@ class DefaultController extends Controller
     public function  listCategoriesAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $productCategories = $em->getRepository('SoftuniProductBundle:ProductCategory')->findAll();;
+        $productCategories = $em->getRepository('SoftuniProductBundle:ProductCategory');
+
+        $query = $productCategories->createQueryBuilder('pc')
+            ->orderBy('pc.rank', 'ASC')
+            ->getQuery();
+
+        $result = $query->getResult();
 
         return $this->render('SoftuniProductBundle:Default:categories.html.twig', array(
-            'productCategories' => $productCategories,));
+            'productCategories' => $result,));
     }
 
     /**
@@ -68,6 +75,31 @@ class DefaultController extends Controller
                         'productCategory' => $productCategory,
                         'children' => $children,
         ));
+    }
+
+    /**
+     * @Route("product/list", name="product-listing")
+     */
+    public function listProductsAction()
+    {
+      $em = $this->getDoctrine()->getManager();
+      $products = $em->getRepository('SoftuniProductBundle:Product')->findAll();
+
+      return $this->render('SoftuniProductBundle:Default:products.html.twig', array(
+          'products' => $products,
+      ));
+    }
+
+    /**
+     * @Route("product/{id}/view", name="product_display")
+     * @Method("GET")
+     */
+    public function displayProductAction(Product $product)
+    {
+      return $this->render('SoftuniProductBundle:Default:product_display.html.twig', array(
+          'product' => $product,
+      ));
+
     }
 
 }
