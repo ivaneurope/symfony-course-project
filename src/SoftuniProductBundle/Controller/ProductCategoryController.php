@@ -5,7 +5,9 @@ namespace SoftuniProductBundle\Controller;
 use SoftuniProductBundle\Entity\ProductCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Productcategory controller.
@@ -118,6 +120,22 @@ class ProductCategoryController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            //File Uploading (essential)
+
+            if($productCategory->getImage() != null) {
+
+                /** @var UploadedFile $file */
+                $file = $productCategory->getImage();
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('product-category_image'),
+                    $fileName
+                );
+                $productCategory->setImage(
+                  new File($this->getParameter('product-category_image').'/'.$productCategory->getImage())
+                );
+            }
 
             return $this->redirectToRoute('admin_product-category_edit', array('id' => $productCategory->getId()));
         }

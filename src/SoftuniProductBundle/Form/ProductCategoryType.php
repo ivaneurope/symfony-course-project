@@ -20,7 +20,7 @@ class ProductCategoryType extends AbstractType
                 ->add('slug')
                 ->add('title')
                 ->add('description')
-                ->add('image', FileType::class, array('required' => false,'label' => 'Image (PNG, JPEG or GIF): ', 'attr' => array('class' => 'w3-btn w3-teal w3-round-large')))
+                ->add('image', FileType::class, array('data_class' => null,'required' => false,'label' => 'Image (PNG, JPEG or GIF): ', 'attr' => array('class' => 'w3-btn w3-teal w3-round-large')))
                 ->add('rank')
                 ->add('parent', EntityType::class, array(
                                                                     'required' => false,
@@ -28,7 +28,7 @@ class ProductCategoryType extends AbstractType
                                                                     'class' => 'SoftuniProductBundle:ProductCategory',
                                                                     ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

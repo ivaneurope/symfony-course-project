@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 /**
@@ -42,9 +43,9 @@ class ProductController extends Controller
      */
     public function newAction(Request $request)
     {
-        /*$productManager = $this->get('softuni.product.product_manager');
-        $product = $productManager->createProduct();*/
-        $product = new Product();
+        $productManager = $this->get('softuni.product.product_manager');
+        $product = $productManager->createProduct();
+        //$product = new Product();
         $form = $this->createForm('SoftuniProductBundle\Form\ProductType', $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -110,6 +111,19 @@ class ProductController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            //File Uploading (essential)
+            /** @var UploadedFile $file */
+            $file = $product->getImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('product_image'),
+                $fileName
+            );
+            $product->setImage(
+              new File($this->getParameter('product_image').'/'.$product->getImage())
+            );
+
 
             return $this->redirectToRoute('admin_product_edit', array('id' => $product->getId()));
         }

@@ -49,6 +49,16 @@
                 <th>Updatedat</th>
                 <td>{% if product.updatedAt %}{{ product.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+            <tr>
+            <th>Categories</th>
+            <td>
+              <ul>
+                {% for category in product.categories %}
+                  <li><a href="{{ path('product-category_display', { 'id': category.id }) }}">{{ category.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </td>
+            </tr>
         </tbody>
     </table>
 
